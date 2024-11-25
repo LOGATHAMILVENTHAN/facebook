@@ -1,6 +1,7 @@
 import {Button,Accordion,Alert,Badge,Breadcrumb,Card,Carousel,Dropdown,DropdownButton,ButtonGroup,SplitButton,Container,Nav,NavDropdown,Navbar,Figure} from 'react-bootstrap';
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+
 function Signup(){
     const [index, setIndex] = useState(0);
 
