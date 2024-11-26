@@ -1,3 +1,15 @@
+*{
+    box-sizing: border-box;
+ 
+    user-select: none;
+    -webkit-user-drag : none;
+    /* width: 90%; */
+ }
+::-webkit-scrollbar{
+    display: none;
+    height:0;
+}
+
 .errorbox{
     color: red;
 

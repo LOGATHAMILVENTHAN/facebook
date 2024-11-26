@@ -12,6 +12,9 @@ function Login() {
     const handleClose = () => setModalShow(false);
     const handleShow = () => setModalShow(true);
 
+    const [email, setEmail] = useState("")
+    const [password,setPassword] = useState("")
+
     // Validation schema for formik
     const schema = yup.object().shape({
         email: yup.string().email('Invalid email').required('Email is required'),
@@ -21,6 +24,14 @@ function Login() {
     const handleSubmit = (values) => {
         console.log(values); 
     }
+    const confirmbutton=()=>{
+        sessionStorage.setItem("email",email)
+        alert(" successfully Log in")
+    }
+    const submitbutton =()=>{
+        let user=sessionStorage.getItem("email")
+        alert(`welcome ${user}`)
+    }
 
     return (
         <div>
@@ -29,7 +40,7 @@ function Login() {
                 validationSchema={schema}
                 onSubmit={handleSubmit}
             >
-                {({ handleSubmit, handleChange, values }) => (
+                {({ handleSubmit, handleChange }) => (
                     <form onSubmit={handleSubmit}>
                         <Row>
                             <Col sm={2}></Col>
@@ -46,26 +57,27 @@ function Login() {
                                             type="text"
                                             placeholder='Email address or phone number'
                                             name='email'
-                                            value={values.email}
-                                            onChange={handleChange}
+                                            value={email}
+                                            onChange = {(e) => {setEmail(e.target.value);handleChange(e)}}
                                         />
                                         <ErrorMessage name='email' component='div' className='errorbox' />
                                         <br />
                                         <input
                                             type='password'
                                             className='a5'
-                                            placeholder='Password'
+                                            placeholder='password'
                                             name='password'
-                                            value={values.password}
-                                            onChange={handleChange}
+                                            value={password}
+                                            onChange={(e) => {setPassword(e.target.value);handleChange(e)}}
                                         />
+                                    
                                         <ErrorMessage name='password' component='div' className='errorbox' />
                                         <br />
-                                        <button className='a6' type="submit">Log in</button>
+                                        <button className='a6' onClick={confirmbutton}>Log in</button>
                                         <br />
                                         <p className='a7'>Forgotten password?</p>
                                         <hr />
-                                        <button className='a8' onClick={handleShow}>Create new account</button>
+                                        <button className='a8' onClick={handleShow} >Create new account</button>
                                         <br />
 
                                         <Modal show={modalShow} onHide={handleClose}>
@@ -81,7 +93,7 @@ function Login() {
                                                     <Col><input className='b3' placeholder='Surname' type='text' /></Col>
                                                 </Row>
                                                 <input className='b4' placeholder='Mobile number or email address' type='text' />
-                                                <input className='b5' placeholder='Password' type='text' />
+                                                <input className='b5' placeholder='enter DOB' type='text' />
                                                 <p className='b6'>Date of birth<i className="bi bi-question-circle-fill"></i></p>
                                                 <Row>
                                                     <Col><Form.Select aria-label="Default select example">
@@ -124,7 +136,7 @@ function Login() {
                                                 <p className='b13'>By clicking Sign Up, you agree to our</p>
                                                 <a className='b14' href='https://www.facebook.com/legal/terms/update'>Terms, Privacy policy, and Cookies.</a>
                                                 <p className='b16'>You may receive SMS notifications from us and can opt out at any time.</p>
-                                                <button className='b17'>Sign in</button>
+                                                <button  onClick={submitbutton}className='b17'>Sign in</button>
                                             </Modal.Body>
                                         </Modal>
                                     </Card.Body>
@@ -135,8 +147,12 @@ function Login() {
                             <p className='a10'>for a celebrity, brand, or business.</p>
                             <Col sm={2}></Col>
                         </Row>
+                        
+
                     </form>
+                    
                 )}
+                
             </Formik>
         </div>
     );
