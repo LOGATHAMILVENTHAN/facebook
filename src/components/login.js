@@ -34,7 +34,7 @@ function Login() {
     }
 
     return (
-        <div>
+        <div className='face'>
             <Formik
                 initialValues={{ email: '', password: '' }}
                 validationSchema={schema}
